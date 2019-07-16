@@ -9,8 +9,13 @@
 				básico Servlet sin JSP</a></li>
 		<li class="list-group-item"><a href="ejemplos/basico2.jsp">Ejemplo
 				básico Servlet con JSP</a></li>
-						<li class="list-group-item"><a href="ejemplos/basico3.jsp">Ejemplo
+		<li class="list-group-item"><a href="ejemplos/basico3.jsp">Ejemplo
 				Servlet response content-type</a></li>
+		<li class="list-group-item"><a href="ejemplos/basico4.jsp">Ejemplo
+				Servlet GET o POST</a></li>
+		
+		<li class="list-group-item"><a href="nombres?iniciar=1">Ejemplo
+				listado nombres JSP</a></li>
 		<li class="list-group-item">JSP</li>
 		<li class="list-group-item">JSTL - Java Server Tag Libraries</li>
 		<li class="list-group-item">Session</li>
