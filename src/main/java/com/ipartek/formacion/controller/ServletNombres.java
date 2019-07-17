@@ -18,34 +18,41 @@ public class ServletNombres extends HttpServlet {
 	ArrayList<String> listaNombres;
        
 
+	public ServletNombres() {
+		
+		listaNombres = new ArrayList<String>();
+		
+		listaNombres.add("Manolo");
+		listaNombres.add("Pepito");
+		listaNombres.add("Ursiciano");
+		listaNombres.add("Agapito");
+		
+		
+	}
+	
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String primera = request.getParameter("iniciar");
-		
-		if(primera != null && "1".equals(primera)) {
-			
-			listaNombres = new ArrayList<String>();
-			
-			listaNombres.add("Manolo");
-			listaNombres.add("Pepito");
-			listaNombres.add("Ursiciano");
-			listaNombres.add("Agapito");
-		} // Solo para rellenar la primera vez, cuando viene desde el enlace
 		
 		String busqueda = request.getParameter("buscar");
 		
 		String encontrado ="";
+		boolean noEncontrado = true;
 		for(String nombre : listaNombres){
 			
 			if(nombre.equals(busqueda)) {
 				
 				encontrado = busqueda + " ha sido encontrado en la lista";
-				
+				noEncontrado = false;
 			}
 		}
 		
-		request.setAttribute("busqueda",encontrado );
+		request.setAttribute("busqueda", busqueda);
+		request.setAttribute("encontrado", encontrado );
 		
+		if(busqueda != null) {
+			request.setAttribute("noEncontrado", "<div role=\"alert\" class=\"alert alert-danger\">\""+busqueda+"\" no ha sido encontrado</div>" );
+		}
 		request.setAttribute("listaNombres", listaNombres);
 		
 		request.getRequestDispatcher("ejemplos/nombres.jsp").forward(request, response);
@@ -60,8 +67,20 @@ public class ServletNombres extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		String nombreNuevo = request.getParameter("nombre");
+		String mensaje;
+		if(nombreNuevo != null) {
+			
+			if("".equals(nombreNuevo)) {
+				mensaje="<span class=\"text-danger\">Campo vacío</span>";
+				request.setAttribute("mensaje", mensaje);
+			}else {
+				listaNombres.add(nombreNuevo);
+			}
 
-		listaNombres.add((String) request.getParameter("nombre"));
+		}
+		
+		
 		doGet(request, response);
 		
 	}
