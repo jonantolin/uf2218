@@ -36,6 +36,7 @@ public class JstlController extends HttpServlet {
 		
 		request.setAttribute("colores", colores);
 		
+		request.setAttribute("numero", "5");
 		request.setAttribute("isLunes", false);
 		request.setAttribute("isAprobado", true);
 		

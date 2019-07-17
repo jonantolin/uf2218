@@ -15,7 +15,7 @@
 	</section>
 	
 	<section class="p-3 bg-light">
-		<h2>&lt;c:foreach &gt;</h2>
+		<h2 class="border-bottom">&lt;c:foreach &gt;</h2>
 		<p>Sirve para iterar sobre una colección sin tener que usar <code>&lt;% ... %&gt;</code> scriptlets</p>
 		<p>Usando EL (Expression Lenguage) <code>&dollar;{colores}</code></p>
 		
@@ -25,7 +25,7 @@
 			</c:forEach>
 		</ol>
 		
-		<h2>&lt;c:if &gt;</h2>
+		<h2 class="border-bottom">&lt;c:if &gt;</h2>
 		<p>Es el equivalente a un if sin los <code>&lt;% ... %&gt;</code> scriptlets</p>
 		<p>Usando EL (Expression Lenguage) <code>&dollar;{condicion/atributoBooleano}</code> en el atributo <code>test</code></p>
 		<p>No hay <code>else if</code> pero se puede evaluar el caso contrario con la exclamación ! dentro de las llaves<code>&dollar;{!atributoBooleano}</code></p>
@@ -41,15 +41,16 @@
 		<c:if test="${!(2+2 == 5) }">Nunca 2+2 será 5, como uso la exclamación ! se imprime esto</c:if>
 		
 		
-		<h2>&lt;c:choose &gt;</h2>
+		<h2 class="border-bottom">&lt;c:choose &gt;</h2>
 		<p>Es el equivalente a un if/if else sin los <code>&lt;% ... %&gt;</code> scriptlets</p>
 		<p>Se usa junto a <bold>&lt;c:when&gt;</bold> a modo de if, y <bold>&lt;c:otherwise&gt;</bold> como si fueran else if</p>
 		<p>Usando EL (Expression Lenguage) <code>&dollar;{condicion/atributoBooleano}</code> en el atributo <code>test</code> de when y de otherwhise</p>
 		<p>No hay <code>else if</code> pero se puede evaluar el caso contrario con la exclamación ! dentro de las llaves <code>&dollar;{!atributoBooleano}</code></p>
 		
 		<c:choose>
-			<c:when test=""></c:when>
-		
+			<c:when test="${numero == 1 }">El número es el 1</c:when>
+			<c:when test="${numero == 3 }">El número es el 3</c:when>
+			<c:when test="${numero == 5 }">El número es el 5</c:when>
 		</c:choose>
 		
 	</section>
