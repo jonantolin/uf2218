@@ -16,4 +16,4 @@
 		</div>
 	</nav> <!-- end navbar -->
 
-	<main class="container text-primary">
+	<main class="container">
