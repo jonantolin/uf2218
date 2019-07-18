@@ -12,6 +12,9 @@
 				<li class="nav-item active"><a class="nav-link" href="index.jsp">Inicio
 						<span class="sr-only">(current)</span>
 				</a></li>
+				<li class="nav-item active"><a class="nav-link" href="videos">Videos
+						<span class="sr-only">(current)</span>
+				</a></li>
 			</ul>
 		</div>
 	</nav> <!-- end navbar -->

@@ -13,11 +13,14 @@
 				Servlet response content-type</a></li>
 		<li class="list-group-item"><a href="ejemplos/basico4.jsp">Ejemplo
 				Servlet GET o POST</a></li>
+		<li class="list-group-item"><a href="ejemplos/ciclovida">Ejemplo
+				de Ciclo de Vida de Servlet</a></li>
 		
 		<li class="list-group-item"><a href="nombres">Ejemplo
 				listado nombres JSP</a></li>
 		<li class="list-group-item">JSP</li>
 		<li class="list-group-item"><a href="jstl">JSTL - Java Server Tag Libraries</a></li>
+		<li class="list-group-item"><a href="ejemplos/expresiones.jsp">EL (Expression Language)</a></li>
 		<li class="list-group-item">Session</li>
 		<li class="list-group-item">Cookies</li>
 		<li class="list-group-item">Filtros</li>

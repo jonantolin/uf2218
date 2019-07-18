@@ -43,7 +43,7 @@
 		
 		<h2 class="border-bottom">&lt;c:choose &gt;</h2>
 		<p>Es el equivalente a un if/if else sin los <code>&lt;% ... %&gt;</code> scriptlets</p>
-		<p>Se usa junto a <bold>&lt;c:when&gt;</bold> a modo de if, y <bold>&lt;c:otherwise&gt;</bold> como si fueran else if</p>
+		<p>Se usa junto a <bold>&lt;c:when&gt;</bold> a modo de if o else if, y <bold>&lt;c:otherwise&gt;</bold> como else final</p>
 		<p>Usando EL (Expression Lenguage) <code>&dollar;{condicion/atributoBooleano}</code> en el atributo <code>test</code> de when y de otherwhise</p>
 		<p>No hay <code>else if</code> pero se puede evaluar el caso contrario con la exclamación ! dentro de las llaves <code>&dollar;{!atributoBooleano}</code></p>
 		
@@ -51,6 +51,7 @@
 			<c:when test="${numero == 1 }">El número es el 1</c:when>
 			<c:when test="${numero == 3 }">El número es el 3</c:when>
 			<c:when test="${numero == 5 }">El número es el 5</c:when>
+			<c:otherwise> No ha salido ninguno de los when, entra por otherwise</c:otherwise>
 		</c:choose>
 		
 	</section>
