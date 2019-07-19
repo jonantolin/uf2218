@@ -19,7 +19,7 @@
 	
 	<div class="form-group">
 		<label for="id">Id: </label> <input type="text" class="form-control"
-			id="id" placeholder="Introduce id" name="id" disabled value="${video.id }">
+			id="id" placeholder="Introduce id" name="id" disabled value="${video.id }"> <!-- revisar disabled, no se manda id -->
 	</div>
 	
 	<div class="form-group">
