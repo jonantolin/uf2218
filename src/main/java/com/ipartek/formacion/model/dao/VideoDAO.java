@@ -65,6 +65,41 @@ public class VideoDAO {
 		return video;
 	}
 	
+	public boolean crear(Video video) { //TODO implementar
+		
+		
+		return false;
+	}
+	
+	public boolean modificar(Video videoNuevo) { //TODO implementar
+		
+		// UPDATE video SET nombre=skjfhgs, codigo= sjkdhfdksj WHERE id=id;
+		boolean actualizado = false;
+		
+		
+		
+		String sql = "UPDATE `video` SET `nombre` = ?, `codigo` = ? WHERE `id` = ?;";
+		try (Connection con = ConnectionManager.getConnection(); PreparedStatement pst = con.prepareStatement(sql)) {
+			
+			pst.setString(1, videoNuevo.getNombre());
+			pst.setString(2, videoNuevo.getCodigo());
+			pst.setInt(3, videoNuevo.getId());
+			
+			int affectedRows = pst.executeUpdate(); // TODO aqui peta
+				
+			if(affectedRows == 1) {
+				actualizado = true; 
+				
+				
+		
+			//}catch(Exception e) {
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return actualizado;
+	}
+	
 	/*
 	public ArrayList<Rol> getByName(String search) {
 		ArrayList<Rol> lista = new ArrayList<Rol>();

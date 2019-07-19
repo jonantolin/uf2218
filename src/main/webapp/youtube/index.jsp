@@ -6,7 +6,7 @@
 	<!-- <a class="btn btn-primary" href="youtube/formulario.jsp">Crear vídeo</a>  -->
 	
 	
-	
+	<a class="btn btn-info" href="youtube/formulario.jsp?nuevoVideo=1">Nuevo vídeo</a>
 	<ol class="list-group">
 		<c:forEach items="${videos }" var="video">
 			<li class="list-group-item">${video.nombre } <a class="btn btn-success" href="https://www.youtube.com/watch?v=${video.codigo }" target="_blank">Ver vídeo</a>
@@ -14,5 +14,6 @@
 			</li>
 		</c:forEach>
 	</ol>
-
+	
+	<p>${modificado }</p>
 <jsp:include page="../includes/footer.jsp"></jsp:include>
