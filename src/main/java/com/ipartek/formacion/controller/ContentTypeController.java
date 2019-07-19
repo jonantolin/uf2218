@@ -46,7 +46,7 @@ public class ContentTypeController extends HttpServlet {
 			
 		case "4":
 			response.setContentType("application/pdf");
-			// TODO crear y escribir en un fichero pdf
+			
 			break;
 		
 		default:

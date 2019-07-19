@@ -19,9 +19,11 @@ public class VideoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static VideoDAO videoDAO;
 	
-	private static final String OP_LISTAR = "1";
-	private static final String OP_DETALLE = "2";
-	private static final String OP_CREAR = "3";
+	public static final String OP_LISTAR = "1";
+	public static final String OP_DETALLE = "2";
+	public static final String OP_INSERTAR = "3";
+	public static final String OP_MODIFICAR = "4";
+	public static final String OP_NUEVO_VIDEO = "5";
 	
 	public static final String VIEW_INDEX = "youtube/index.jsp";
 	public static final String VIEW_FORMU = "youtube/formulario.jsp";
@@ -38,32 +40,6 @@ public class VideoController extends HttpServlet {
 
 		VideoDAO videoDAO = VideoDAO.getInstance();
 		
-		String vieneDeFormu = request.getParameter("porformu");
-		
-		if(vieneDeFormu != null && "1".equals(vieneDeFormu)) { //Si entra, vendrá desde formulario.jsp
-			
-			// Si se ha mandado id en el input hidden, sera para modificar, si se ha mandado vacio sera para crear
-			
-			String idMandado = request.getParameter("idMandado");
-			
-			if("".equals(idMandado)) { //Crear nuevo video
-				
-				
-				
-			}else { // Modificar video
-				
-				int id = Integer.parseInt(idMandado);
-				Video videoNuevo = new Video();
-				videoNuevo.setId(id);
-				videoNuevo.setNombre(request.getParameter("nombre"));
-				videoNuevo.setCodigo(request.getParameter("codigo"));
-				
-				if(videoDAO.modificar(videoNuevo)) {
-					request.setAttribute("modificado", " Modificado con éxito");
-				}
-			}
-			
-		}else { // NO vendra desde formulario,jsp
 			
 			String op = request.getParameter("op");
 			
@@ -74,25 +50,99 @@ public class VideoController extends HttpServlet {
 			
 				case OP_LISTAR: 
 					request.setAttribute("videos", videoDAO.getAll());
-					
 					view = VIEW_INDEX;
-					request.getRequestDispatcher(view).forward(request, response);
 					break;
 				
 				case OP_DETALLE:
+					
 					int id = Integer.parseInt(request.getParameter("id"));
+					
 					request.setAttribute("video", videoDAO.getById(id));
-					request.setAttribute("modificar", "si");
+					request.setAttribute("op", OP_MODIFICAR); //lo uso para que se envie como input hidden en el formur si se quiere modificar
+					
 					view = VIEW_FORMU;
-					request.getRequestDispatcher(view).forward(request, response);
 					break;
+					
+				case OP_NUEVO_VIDEO: // va al formu vacio para insertar nuevo video
+					
+					request.setAttribute("op", OP_INSERTAR); //lo uso para que se envie como input hidden en el formur si se quiere modificar
+					
+					view = VIEW_FORMU;
+					break;
+				
+				case OP_INSERTAR: // Cuando se envia el nuevo video desde el formu
+					
+					if(crear(request, response)) {
+						
+						request.setAttribute("op", OP_MODIFICAR); // para recoger en en el value del input hidden una vez creado
+						request.setAttribute("mensaje", " Nuevo video registrado con éxito");
+					
+					}else {	
+						request.setAttribute("mensaje", " No se pudo crear");
+					}
+					
+					view = VIEW_FORMU;
+					break;
+					
+				case OP_MODIFICAR: 
+					
+					if(modificar(request, response)) {
+						
+						request.setAttribute("op", OP_MODIFICAR);
+						request.setAttribute("mensaje", " Registro modificado con éxito");
+						
+					}else {
+						request.setAttribute("mensaje", "No ha sido posible modificarlo");
+					}
+					
+					view = VIEW_FORMU;
+					break;	
 					
 				default:
 					request.getRequestDispatcher("youtube/index.jsp").forward(request, response);
 			}
 			
+		request.getRequestDispatcher(view).forward(request, response);
+	}
+
+	private boolean crear(HttpServletRequest request, HttpServletResponse response) {
+		boolean creado = false;
+		
+		Video videoNuevo = new Video();
+
+		videoNuevo.setNombre(request.getParameter("nombre"));
+		videoNuevo.setCodigo(request.getParameter("codigo"));
+		
+		if(videoDAO.crear(videoNuevo)) {
+			creado = true;
+			request.setAttribute("video", videoNuevo);
 		}
-	
+		
+		
+		
+		return creado;
+	}
+
+	private boolean modificar(HttpServletRequest request, HttpServletResponse response) {
+		
+		boolean modificado = false;
+		
+		String idMandado = request.getParameter("id");
+
+		int id = Integer.parseInt(idMandado);
+		
+		Video videoNuevo = new Video();
+		videoNuevo.setId(id);
+		videoNuevo.setNombre(request.getParameter("nombre"));
+		videoNuevo.setCodigo(request.getParameter("codigo"));
+		
+		if(videoDAO.modificar(videoNuevo)) {
+			modificado = true;
+			request.setAttribute("video", videoNuevo);
+		}
+		
+		return modificado;
+		
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -104,7 +154,7 @@ public class VideoController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doProccess(request, response);
 	}
 
