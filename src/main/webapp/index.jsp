@@ -18,7 +18,7 @@
 		
 		<li class="list-group-item"><a href="nombres">Ejemplo
 				listado nombres JSP</a></li>
-		<li class="list-group-item">JSP</li>
+		<li class="list-group-item"><a href="ejemplos/jsp.jsp">JSP (Java Server Pages)</a></li>
 		<li class="list-group-item"><a href="jstl">JSTL - Java Server Tag Libraries</a></li>
 		<li class="list-group-item"><a href="ejemplos/expresiones.jsp">EL (Expression Language)</a></li>
 		<li class="list-group-item">Session</li>
