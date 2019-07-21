@@ -76,12 +76,12 @@ public class VideoController extends HttpServlet {
 					if(crear(request, response)) {
 						
 						request.setAttribute("op", OP_MODIFICAR); // para recoger en en el value del input hidden una vez creado
-						request.setAttribute("mensaje", " Nuevo video registrado con éxito");
+						request.setAttribute("mensaje", " <div class=\"alert alert-success\" role=\"alert\">Nuevo video registrado con éxito</div>");
 					
 					}else {	
-						request.setAttribute("mensaje", " No se pudo crear");
+						request.setAttribute("mensaje", "<div class=\"alert alert-danger\" role=\"alert\"> No se pudo crear</div>");
 					}
-					
+					// <div class="alert alert-success" role="alert"></div>
 					view = VIEW_FORMU;
 					break;
 					
@@ -90,10 +90,10 @@ public class VideoController extends HttpServlet {
 					if(modificar(request, response)) {
 						
 						request.setAttribute("op", OP_MODIFICAR);
-						request.setAttribute("mensaje", " Registro modificado con éxito");
+						request.setAttribute("mensaje", "<div class=\"alert alert-success\" role=\"alert\"> Video modificado con éxito</div>");
 						
 					}else {
-						request.setAttribute("mensaje", "No ha sido posible modificarlo");
+						request.setAttribute("mensaje", "<div class=\"alert alert-danger\" role=\"alert\">No ha sido posible modificarlo</div>");
 					}
 					
 					view = VIEW_FORMU;
@@ -104,10 +104,10 @@ public class VideoController extends HttpServlet {
 					if(eliminar(request, response)) {
 						
 						request.setAttribute("op", OP_INSERTAR);
-						request.setAttribute("mensaje", " Registro eliminado con éxito");
+						request.setAttribute("mensaje", "<div class=\"alert alert-success\" role=\"alert\"> Video eliminado con éxito</div>");
 						
 					}else {
-						request.setAttribute("mensaje", "No ha sido posible eliminarlo");
+						request.setAttribute("mensaje", "<div class=\"alert alert-danger\" role=\"alert\">No ha sido posible eliminarlo</div>");
 					}
 					
 					view = VIEW_FORMU;

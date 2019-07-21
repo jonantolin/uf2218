@@ -24,7 +24,7 @@
 			<label for="id">Id: </label> <input type="text" class="form-control"
 				id="id" placeholder="id" name="id" readonly value="${video.id }">			
 		</div>
-		
+		${mensaje }
 		<div class="form-group">
 			<input class="btn btn-primary d-inline" type="submit" value="${(op == 4)?'Modificar':'Crear' }">
 			<a class="btn btn-info" href="videos">Volver al listado</a>
@@ -37,7 +37,7 @@
 		<input type="hidden" name="op" value="${op }">
 	</form>
 	
-	<p>${mensaje }</p>
+	
 
 
 <jsp:include page="../includes/footer.jsp"></jsp:include>

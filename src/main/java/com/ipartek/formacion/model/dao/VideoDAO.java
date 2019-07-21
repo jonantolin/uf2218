@@ -49,9 +49,11 @@ public class VideoDAO {
 
 	public Video getById(int id) {
 		Video video = new Video();
-		String sql = "SELECT `id`, `nombre`, `codigo`  FROM `video` WHERE `id` = " + id + ";";
+		String sql = "SELECT `id`, `nombre`, `codigo`  FROM `video` WHERE `id` = ? ;";
 		try (Connection con = ConnectionManager.getConnection(); PreparedStatement pst = con.prepareStatement(sql)) {
-
+			
+			pst.setInt(1, id);
+			
 			try (ResultSet rs = pst.executeQuery()) {
 				if (rs.next()) {
 

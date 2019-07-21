@@ -16,5 +16,4 @@
 		</c:forEach>
 	</ol>
 	
-	<p>${modificado }</p>
 <jsp:include page="../includes/footer.jsp"></jsp:include>
