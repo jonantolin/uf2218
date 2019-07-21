@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import com.ipartek.formacion.model.ConnectionManager;
 import com.ipartek.formacion.model.pojo.Video;
+import com.mysql.jdbc.Statement;
 
 public class VideoDAO {
 
@@ -89,24 +90,50 @@ public class VideoDAO {
 		return actualizado;
 	}
 
-	public boolean crear(Video videoNuevo) { // TODO recuperar id autogenerada para poder modificar
+	public int crear(Video videoNuevo) { 
 
-		boolean creado = false;
+		int idGenerado = -1;
 
 		String sql = "INSERT INTO `video` (nombre, codigo) VALUES ( ? , ?);";
 
-		try (Connection con = ConnectionManager.getConnection(); PreparedStatement pst = con.prepareStatement(sql)) {
+		try (Connection con = ConnectionManager.getConnection(); PreparedStatement pst = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
 			pst.setString(1, videoNuevo.getNombre());
 			pst.setString(2, videoNuevo.getCodigo());
 
-			pst.execute();
-			creado = true;
+			pst.executeUpdate();
+			
+			ResultSet rs = pst.getGeneratedKeys(); //recupera key (id en este caso) generado por la BDD
+			rs.next();
+			idGenerado = rs.getInt(1);
+
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return creado;
+		return idGenerado;
+	}
+
+	public boolean eliminar(int id) {
+
+		boolean eliminado = false;
+
+		String sql = "DELETE FROM `video` WHERE `id`= ?;";
+
+		try (Connection con = ConnectionManager.getConnection(); PreparedStatement pst = con.prepareStatement(sql)) {
+
+			pst.setInt(1, id);
+			
+			if(pst.executeUpdate() == 1) { 
+				
+				eliminado = true;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return eliminado;
 	}
 
 	/*

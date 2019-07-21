@@ -1,5 +1,7 @@
+<%@page import="com.ipartek.formacion.controller.VideoController"%>
 <jsp:include page="../includes/header.jsp"></jsp:include>
 <jsp:include page="../includes/navbar.jsp"></jsp:include>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 	<h1>Vídeo</h1>
 	
@@ -25,7 +27,11 @@
 		
 		<div class="form-group">
 			<input class="btn btn-primary d-inline" type="submit" value="${(op == 4)?'Modificar':'Crear' }">
-			<a class="btn btn-success" href="videos">Volver al listado</a>
+			<a class="btn btn-info" href="videos">Volver al listado</a>
+			<c:if test="${op == 4 }">
+				<a class="btn btn-danger" href="videos?id=${video.id }&op=<%=VideoController.OP_ELIMINAR %>">Eliminar</a>
+			</c:if>
+			
 		</div>
 		
 		<input type="hidden" name="op" value="${op }">

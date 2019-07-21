@@ -24,6 +24,7 @@ public class VideoController extends HttpServlet {
 	public static final String OP_INSERTAR = "3";
 	public static final String OP_MODIFICAR = "4";
 	public static final String OP_NUEVO_VIDEO = "5";
+	public static final String OP_ELIMINAR = "6";
 	
 	public static final String VIEW_INDEX = "youtube/index.jsp";
 	public static final String VIEW_FORMU = "youtube/formulario.jsp";
@@ -98,11 +99,38 @@ public class VideoController extends HttpServlet {
 					view = VIEW_FORMU;
 					break;	
 					
+				case OP_ELIMINAR: 
+					
+					if(eliminar(request, response)) {
+						
+						request.setAttribute("op", OP_INSERTAR);
+						request.setAttribute("mensaje", " Registro eliminado con éxito");
+						
+					}else {
+						request.setAttribute("mensaje", "No ha sido posible eliminarlo");
+					}
+					
+					view = VIEW_FORMU;
+					break;				
 				default:
-					request.getRequestDispatcher("youtube/index.jsp").forward(request, response);
+					view = VIEW_INDEX;
 			}
 			
 		request.getRequestDispatcher(view).forward(request, response);
+	}
+
+	private boolean eliminar(HttpServletRequest request, HttpServletResponse response) {
+		
+		boolean eliminado = false;
+		
+		int id = Integer.parseInt(request.getParameter("id"));
+		
+		if(videoDAO.eliminar(id)) {
+			eliminado = true;
+		}
+		
+		
+		return eliminado;
 	}
 
 	private boolean crear(HttpServletRequest request, HttpServletResponse response) {
@@ -113,8 +141,11 @@ public class VideoController extends HttpServlet {
 		videoNuevo.setNombre(request.getParameter("nombre"));
 		videoNuevo.setCodigo(request.getParameter("codigo"));
 		
-		if(videoDAO.crear(videoNuevo)) {
+		int idRecuperado = videoDAO.crear(videoNuevo);
+		
+		if(idRecuperado != -1) {
 			creado = true;
+			videoNuevo.setId(idRecuperado);
 			request.setAttribute("video", videoNuevo);
 		}
 		
