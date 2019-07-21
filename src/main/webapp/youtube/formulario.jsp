@@ -28,15 +28,19 @@
 		<div class="form-group">
 			<input class="btn btn-primary d-inline" type="submit" value="${(op == 4)?'Modificar':'Crear' }">
 			<a class="btn btn-info" href="videos">Volver al listado</a>
-			<c:if test="${op == 4 }">
-				<a class="btn btn-danger" href="videos?id=${video.id }&op=<%=VideoController.OP_ELIMINAR %>">Eliminar</a>
-			</c:if>
-			
+					
 		</div>
 		
 		<input type="hidden" name="op" value="${op }">
 	</form>
 	
+	<c:if test="${op == 4 }">
+		<form action="videos" method="post" class="d-inline">
+			<input type="hidden" name="op" value="<%=VideoController.OP_ELIMINAR %>"> 
+			<input type="hidden" name="id" value="${video.id }">
+			<input type="submit" class="btn btn-danger" value="Eliminar">
+		</form>
+	</c:if>
 	
 
 

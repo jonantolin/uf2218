@@ -79,6 +79,7 @@ public class VideoController extends HttpServlet {
 						request.setAttribute("mensaje", " <div class=\"alert alert-success\" role=\"alert\">Nuevo video registrado con éxito</div>");
 					
 					}else {	
+						request.setAttribute("op", OP_INSERTAR);
 						request.setAttribute("mensaje", "<div class=\"alert alert-danger\" role=\"alert\"> No se pudo crear</div>");
 					}
 					// <div class="alert alert-success" role="alert"></div>
@@ -89,12 +90,13 @@ public class VideoController extends HttpServlet {
 					
 					if(modificar(request, response)) {
 						
-						request.setAttribute("op", OP_MODIFICAR);
 						request.setAttribute("mensaje", "<div class=\"alert alert-success\" role=\"alert\"> Video modificado con éxito</div>");
 						
 					}else {
 						request.setAttribute("mensaje", "<div class=\"alert alert-danger\" role=\"alert\">No ha sido posible modificarlo</div>");
 					}
+					
+					request.setAttribute("op", OP_MODIFICAR);
 					
 					view = VIEW_FORMU;
 					break;	
@@ -146,10 +148,10 @@ public class VideoController extends HttpServlet {
 		if(idRecuperado != -1) {
 			creado = true;
 			videoNuevo.setId(idRecuperado);
-			request.setAttribute("video", videoNuevo);
+			
 		}
 		
-		
+		request.setAttribute("video", videoNuevo);
 		
 		return creado;
 	}
@@ -169,9 +171,9 @@ public class VideoController extends HttpServlet {
 		
 		if(videoDAO.modificar(videoNuevo)) {
 			modificado = true;
-			request.setAttribute("video", videoNuevo);
 		}
 		
+		request.setAttribute("video", videoNuevo);
 		return modificado;
 		
 	}

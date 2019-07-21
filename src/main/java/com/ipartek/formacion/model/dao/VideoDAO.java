@@ -113,8 +113,10 @@ public class VideoDAO {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			
+			return idGenerado;
 		}
-		return idGenerado;
 	}
 
 	public boolean eliminar(int id) {
