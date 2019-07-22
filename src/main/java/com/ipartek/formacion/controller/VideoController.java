@@ -36,8 +36,8 @@ public class VideoController extends HttpServlet {
 	public static final String OP_NUEVO_VIDEO = "5";
 	public static final String OP_ELIMINAR = "6";
 	
-	public static final String VIEW_INDEX = "youtube/index.jsp";
-	public static final String VIEW_FORMU = "youtube/formulario.jsp";
+	public static final String VIEW_INDEX = "/youtube/index.jsp";
+	public static final String VIEW_FORMU = "/youtube/formulario.jsp";
 	public static String view = VIEW_INDEX;
 	
 	@Override
