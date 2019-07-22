@@ -13,8 +13,7 @@
 				Servlet response content-type</a></li>
 		<li class="list-group-item"><a href="ejemplos/basico4.jsp">Ejemplo
 				Servlet GET o POST</a></li>
-		<li class="list-group-item"><a href="ejemplos/ciclovida.jsp">Ejemplo
-				de Ciclo de Vida de Servlet</a></li>
+		<li class="list-group-item"><a href="ejemplos/ciclovida.jsp">Ciclo de Vida de Servlet</a></li>
 		
 		<li class="list-group-item"><a href="nombres">Ejemplo
 				listado nombres JSP</a></li>

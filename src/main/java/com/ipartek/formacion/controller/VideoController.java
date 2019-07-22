@@ -1,11 +1,17 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
+import java.util.Set;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 import com.ipartek.formacion.model.dao.VideoDAO;
 import com.ipartek.formacion.model.pojo.Video;
@@ -18,6 +24,10 @@ public class VideoController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private static VideoDAO videoDAO;
+	
+	//Crear Factoria y Validador
+	 private ValidatorFactory factory;
+	 private Validator validator;
 	
 	public static final String OP_LISTAR = "1";
 	public static final String OP_DETALLE = "2";
@@ -33,6 +43,8 @@ public class VideoController extends HttpServlet {
 	@Override
 		public void init() throws ServletException {
 			videoDAO  = VideoDAO.getInstance();
+			factory = Validation.buildDefaultValidatorFactory();
+			validator = factory.getValidator();
 			super.init();
 		}
 	
@@ -73,30 +85,16 @@ public class VideoController extends HttpServlet {
 				
 				case OP_INSERTAR: // Cuando se envia el nuevo video desde el formu
 					
-					if(crear(request, response)) {
+					crear(request, response);
 						
-						request.setAttribute("op", OP_MODIFICAR); // para recoger en en el value del input hidden una vez creado
-						request.setAttribute("mensaje", " <div class=\"alert alert-success\" role=\"alert\">Nuevo video registrado con éxito</div>");
-					
-					}else {	
-						request.setAttribute("op", OP_INSERTAR);
-						request.setAttribute("mensaje", "<div class=\"alert alert-danger\" role=\"alert\"> No se pudo crear</div>");
-					}
 					// <div class="alert alert-success" role="alert"></div>
 					view = VIEW_FORMU;
 					break;
 					
 				case OP_MODIFICAR: 
 					
-					if(modificar(request, response)) {
-						
-						request.setAttribute("mensaje", "<div class=\"alert alert-success\" role=\"alert\"> Video modificado con éxito</div>");
-						
-					}else {
-						request.setAttribute("mensaje", "<div class=\"alert alert-danger\" role=\"alert\">No ha sido posible modificarlo</div>");
-					}
+					modificar(request, response);
 					
-					request.setAttribute("op", OP_MODIFICAR);
 					
 					view = VIEW_FORMU;
 					break;	
@@ -143,14 +141,38 @@ public class VideoController extends HttpServlet {
 		videoNuevo.setNombre(request.getParameter("nombre"));
 		videoNuevo.setCodigo(request.getParameter("codigo"));
 		
-		int idRecuperado = videoDAO.crear(videoNuevo);
+		Set<ConstraintViolation<Video>> violations = validator.validate(videoNuevo);
 		
-		if(idRecuperado != -1) {
-			creado = true;
-			videoNuevo.setId(idRecuperado);
+		if(violations.isEmpty()) {
+			
+			int idRecuperado = videoDAO.crear(videoNuevo);
+		
+			if(idRecuperado != -1) {
+				creado = true;
+				videoNuevo.setId(idRecuperado);
+				
+			}
+			
+			request.setAttribute("op", OP_MODIFICAR); // para recoger en en el value del input hidden una vez creado
+			request.setAttribute("mensaje", " <div class=\"alert alert-success\" role=\"alert\">Nuevo video registrado con éxito</div>");
+			
+			
+		}else {
+			
+			String mensaje = "<div class=\"alert alert-danger\" role=\"alert\">";
+			
+			for (ConstraintViolation<Video> violation : violations) {
+
+				mensaje += violation.getPropertyPath()+": "+violation.getMessage()+"<br>";
+			}
+			
+			mensaje += "</div>";
+			
+			
+			request.setAttribute("op", OP_INSERTAR);
+			request.setAttribute("mensaje", mensaje);
 			
 		}
-		
 		request.setAttribute("video", videoNuevo);
 		
 		return creado;
@@ -169,10 +191,30 @@ public class VideoController extends HttpServlet {
 		videoNuevo.setNombre(request.getParameter("nombre"));
 		videoNuevo.setCodigo(request.getParameter("codigo"));
 		
-		if(videoDAO.modificar(videoNuevo)) {
-			modificado = true;
+		Set<ConstraintViolation<Video>> violations = validator.validate(videoNuevo); 
+		
+		if(violations.isEmpty()) {
+		
+			if(videoDAO.modificar(videoNuevo)) {
+				modificado = true;
+			}
+			request.setAttribute("mensaje", "<div class=\"alert alert-success\" role=\"alert\"> Video modificado con éxito</div>");
+		}else {
+			
+			String mensaje = "<div class=\"alert alert-danger\" role=\"alert\">";
+			
+			for (ConstraintViolation<Video> violation : violations) {
+
+				mensaje += violation.getPropertyPath()+": "+violation.getMessage()+"<br>";
+			}
+			
+			mensaje += "</div>";
+			
+			request.setAttribute("mensaje", mensaje);
+			
 		}
 		
+		request.setAttribute("op", OP_MODIFICAR);
 		request.setAttribute("video", videoNuevo);
 		return modificado;
 		
@@ -190,5 +232,5 @@ public class VideoController extends HttpServlet {
 		
 		doProccess(request, response);
 	}
-
+//TODO implementar mensaje de alerta con el pojo Alert
 }

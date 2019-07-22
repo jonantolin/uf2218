@@ -26,10 +26,6 @@ public class Alert {
 	public void setTexto(String texto) {
 		this.texto = texto;
 	}
-	
-	
-	// TODO implementar ciclo de vida
-	
-	// TODO porbar cagada adrede creando una página de error y mostrandola cuando casque
+
 
 }

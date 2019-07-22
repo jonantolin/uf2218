@@ -1,9 +1,18 @@
 package com.ipartek.formacion.model.pojo;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Video {
 	
 	private int id;
+	
+	@NotNull
+	@Size(min=3, max=150)
 	private String nombre;
+	
+	@NotNull
+	@Size(min=11, max=11, message = "Exactamente debe ser 11") //TODO hacer los demas
 	private String codigo;
 	
 	public Video() {
