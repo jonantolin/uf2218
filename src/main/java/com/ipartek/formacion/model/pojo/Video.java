@@ -12,7 +12,7 @@ public class Video {
 	private String nombre;
 	
 	@NotNull
-	@Size(min=11, max=11, message = "Exactamente debe ser 11") //TODO hacer los demas
+	@Size(min=11, max=11, message = "Exactamente debe ser 11") 
 	private String codigo;
 	
 	public Video() {

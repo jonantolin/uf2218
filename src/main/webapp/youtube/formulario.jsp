@@ -7,7 +7,7 @@
 	
 	<div class="row">
 		<div class="formulario col-12 col-md-6">
-			<form action="videos" method="POST">
+			<form action="backoffice/videos" method="POST">
 			
 				<div class="form-group">
 					<label for="titulo">Titulo: </label> <input type="text"
@@ -29,7 +29,7 @@
 				${mensaje }
 				<div class="form-group">
 					<input class="btn btn-primary d-inline" type="submit" value="${(op == 4)?'Modificar':'Crear' }">
-					<a class="btn btn-info" href="videos">Volver al listado</a>
+					<a class="btn btn-info" href="backoffice/videos">Volver al listado</a>
 							
 				</div>
 				
@@ -60,7 +60,7 @@
 				      </div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-				        <form action="videos" method="post" class="d-inline">
+				        <form action="backoffice/videos" method="post" class="d-inline">
 								<input type="hidden" name="op" value="<%=VideoController.OP_ELIMINAR %>"> 
 								<input type="hidden" name="id" value="${video.id }">
 								<input type="submit" class="btn btn-danger" value="Eliminar">
