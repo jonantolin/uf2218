@@ -70,7 +70,9 @@ public class VideoController extends HttpServlet {
 					
 					int id = Integer.parseInt(request.getParameter("id"));
 					
-					request.setAttribute("video", videoDAO.getById(id));
+					Video video = videoDAO.getById(id);
+					request.setAttribute("video", video);
+					//visitados.add()
 					request.setAttribute("op", OP_MODIFICAR); //lo uso para que se envie como input hidden en el formur si se quiere modificar
 					
 					view = VIEW_FORMU;

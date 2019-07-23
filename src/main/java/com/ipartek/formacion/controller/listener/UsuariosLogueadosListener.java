@@ -22,6 +22,9 @@ public class UsuariosLogueadosListener implements HttpSessionListener, HttpSessi
 	//public static String pruebaIp = "";
 	public static ArrayList<String> usuarios = new ArrayList<String>();
 	HttpSession session;
+	public static String mens="";
+	public static String usuarioAnterior;
+	public static String ultimaSesion;
     /**
      * Default constructor. 
      */
@@ -36,6 +39,8 @@ public class UsuariosLogueadosListener implements HttpSessionListener, HttpSessi
          // sesion creada
     	
     	session = se.getSession(); //Recupero la sesion la primera vez que entra
+    	String estaSesion = session.getId();
+    	session.setAttribute("mensaje", mens);
 
     }
 
@@ -44,7 +49,18 @@ public class UsuariosLogueadosListener implements HttpSessionListener, HttpSessi
      */
     public void sessionDestroyed(HttpSessionEvent se)  { 
     	//session.setAttribute("mensaje", "<p>La sesión ha caducado. Vuelve a entrar.</p>");
-    
+    	//HttpSession sesionEliminada = se.getSession();
+    	if(se.getSession().getAttribute("logoutManual") != null) {
+    		mens="Gracias por su visita, vuelve pronto";
+    		
+    	}else {
+    		mens="La sesión ha expirado, vuelve a ingresar";
+    	}
+    	
+    	
+    	//se.getSession().setAttribute("mensaje", "Llevame cojones");
+    	//sesionEliminada.setAttribute("mensaje", "Llevame cojones");
+    	
     }
 
 	/**

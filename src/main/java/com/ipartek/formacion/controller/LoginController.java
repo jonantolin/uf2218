@@ -47,7 +47,7 @@ public class LoginController extends HttpServlet {
 			// session.setMaxInactiveInterval(60 * 5); // 5 min, tiempo de sesion o expirara (mejor en web.xml)
 			
 			session.setAttribute("usuario", usuario);
-			session.setAttribute("nuevoUsuario", request.getRemoteAddr());
+			session.setAttribute("nuevoUsuario", request.getRemoteAddr()); //recojo Ip de la sesion actual
 			
 			request.setAttribute("mensaje", "<p>ONGI ETORRI, "+usuario+"</p>");
 			

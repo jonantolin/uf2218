@@ -22,16 +22,20 @@ import javax.servlet.http.HttpSession;
 				DispatcherType.INCLUDE, 
 				DispatcherType.ERROR
 		}
-					, urlPatterns = { "/backoffice/*" })
+					, urlPatterns = { "/backoffice/*" }) // Este filtro se aplica a cualquier peticion a esta ruta
 public class FilterSeguridad implements Filter {
 
-
+	
 	public void destroy() {
 		
 	}
 
+
+
 	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
+	 * Lo unico que hago es redireccionar al login,
+	 * si no pasa el filtro -> va a login.jsp
+	 * si lo pasa (el atributo "usuario" existe) -> va a la ruta a la que iba (que recojo previamente)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
@@ -41,11 +45,15 @@ public class FilterSeguridad implements Filter {
 		
 		HttpSession session = req.getSession();
 		
-		request.setAttribute("callback", req.getRequestURI());
+		request.setAttribute("callback", req.getRequestURI()); // "coloco" este atributo en la request q mandaré si pasa el filtro
 		
 		if(session.getAttribute("usuario") != null) {
 			
-			chain.doFilter(request, response);
+			if("admin".equals(session.getAttribute("usuario"))) {
+				chain.doFilter(request, response); // Pasa el filtro y continua (o accede al siguiente filtro si lo hubiera)
+				
+			}
+			
 			
 		}else {
 			// response redireccionar a login

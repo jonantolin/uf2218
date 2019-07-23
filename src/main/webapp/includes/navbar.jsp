@@ -23,12 +23,16 @@
 					</a></li>
 				</c:if>
 				<c:if test="${usuario != null }">
-					<li class="nav-item"><a class="nav-link" href="logout">Logout
-			${usuario }
+					<li class="nav-item"><a class="nav-link" href="logout">
+					Logout ${usuario }
 					</a></li>
 					<li class="nav-item"><a class="nav-link" href="backoffice/index.jsp">BackOffice
 			
 					</a></li>
+					<!-- <c:forEach items="${visitados }" var="video">
+						<li>${video.nombre }</li>
+					
+					</c:forEach> -->
 				</c:if>
 			</ul>
 		</div>

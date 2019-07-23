@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.ipartek.formacion.controller.listener.UsuariosLogueadosListener;
+
 /**
  * Servlet implementation class LogOutController
  */
@@ -35,12 +37,14 @@ public class LogOutController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		session.setAttribute("logoutManual", true);
 		session.removeAttribute("usuario");
 		session.invalidate();
-		session = null;
+		//session = null;
 		
-		request.setAttribute("mensaje", "<p>Gracias por visitarnos</p>");
-		
+		//request.setAttribute("mensaje", "<p>Gracias por visitarnos</p>");
+		String mensaje = UsuariosLogueadosListener.mens;
+		request.setAttribute("mensaje", mensaje);
 		request.getRequestDispatcher("login.jsp").forward(request, response);
 	}
 
