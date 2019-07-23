@@ -39,15 +39,29 @@ public class LoginController extends HttpServlet {
 		String usuario = request.getParameter("usuario");
 		String password = request.getParameter("pass");
 		
+		String ultimaURL = (String) request.getAttribute("callback");
+		
 		if("admin".equals(usuario) && "admin".equals(password)) {
 			
 			HttpSession session = request.getSession();
-			session.setAttribute("usuario", usuario);
+			// session.setMaxInactiveInterval(60 * 5); // 5 min, tiempo de sesion o expirara (mejor en web.xml)
 			
+			session.setAttribute("usuario", usuario);
+			session.setAttribute("nuevoUsuario", request.getRemoteAddr());
 			
 			request.setAttribute("mensaje", "<p>ONGI ETORRI, "+usuario+"</p>");
 			
-			request.getRequestDispatcher("backoffice/index.jsp").forward(request, response);
+			
+			
+			if(ultimaURL == null) {
+				//request.getRequestDispatcher("backoffice/index.jsp").forward(request, response);
+				response.sendRedirect("backoffice/index.jsp");
+			}else {
+				session.removeAttribute("callback");
+				response.sendRedirect(ultimaURL);
+			}
+			
+			
 			
 		}else {
 			

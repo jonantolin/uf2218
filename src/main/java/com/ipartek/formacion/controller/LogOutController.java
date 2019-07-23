@@ -44,4 +44,11 @@ public class LogOutController extends HttpServlet {
 		request.getRequestDispatcher("login.jsp").forward(request, response);
 	}
 
+	/*
+	 * El usuario cada vez que va al Detalle del video un dropdownbutton con todos los videos que ha visto
+	 * */
+	
+	// Si te redirige fuera, un mensaje que diga "ha caducado la sesion" o similar
+	
+	//Explicar Session, Filtros, Listeners, y Redirecciones
 }

@@ -1,6 +1,6 @@
 <%@page import="com.ipartek.formacion.controller.VideoController"%>
-<jsp:include page="../includes/header.jsp"></jsp:include>
-<jsp:include page="../includes/navbar.jsp"></jsp:include>
+<jsp:include page="/includes/header.jsp"></jsp:include>
+<jsp:include page="/includes/navbar.jsp"></jsp:include>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 	<h1>Vídeo</h1>
@@ -78,4 +78,4 @@
 		</div>
 	</div>
 
-<jsp:include page="../includes/footer.jsp"></jsp:include>
+<jsp:include page="/includes/footer.jsp"></jsp:include>

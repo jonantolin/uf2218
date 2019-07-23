@@ -26,6 +26,9 @@
 					<li class="nav-item"><a class="nav-link" href="logout">Logout
 			${usuario }
 					</a></li>
+					<li class="nav-item"><a class="nav-link" href="backoffice/index.jsp">BackOffice
+			
+					</a></li>
 				</c:if>
 			</ul>
 		</div>
