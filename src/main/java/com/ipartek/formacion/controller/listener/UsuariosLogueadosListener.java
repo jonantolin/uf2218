@@ -40,7 +40,7 @@ public class UsuariosLogueadosListener implements HttpSessionListener, HttpSessi
     	
     	session = se.getSession(); //Recupero la sesion la primera vez que entra
     	String estaSesion = session.getId();
-    	session.setAttribute("mensaje", mens);
+    	//session.setAttribute("mensaje", mens);
 
     }
 
@@ -69,6 +69,11 @@ public class UsuariosLogueadosListener implements HttpSessionListener, HttpSessi
     public void attributeAdded(HttpSessionBindingEvent event)  { 
     	
     	Object recuperado = session.getAttribute("nuevoUsuario");
+    	
+    	// Mejor if "nuevoUsuario".equals(event.getName()){
+    	// usuarios.add(event.getValue())
+    	//}
+    	//ordenar hashmap
     	
     	if(recuperado != null) {
     		

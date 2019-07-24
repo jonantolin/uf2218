@@ -1,6 +1,7 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -8,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -74,6 +76,18 @@ public class VideoController extends HttpServlet {
 					request.setAttribute("video", video);
 					//visitados.add()
 					request.setAttribute("op", OP_MODIFICAR); //lo uso para que se envie como input hidden en el formur si se quiere modificar
+					
+					HttpSession session = request.getSession();
+					
+					HashMap<Integer, Video> videosVistos = (HashMap<Integer, Video>) session.getAttribute("videosVistos");
+					
+					if(videosVistos == null) {
+						
+						videosVistos = new HashMap<Integer, Video>();
+					}
+					
+					videosVistos.put(video.getId(), video);
+					session.setAttribute("videosVistos", videosVistos);
 					
 					view = VIEW_FORMU;
 					break;
