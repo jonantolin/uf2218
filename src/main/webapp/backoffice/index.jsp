@@ -5,15 +5,17 @@
 
 <!-- meta http-equiv="refresh" content=3   // refresca la pagina cada 3 seg -->
 
-<!--  <meta http-equiv="refresh" content=3>  -->
+<meta http-equiv="refresh" content=3> 
 	<h1>BACKOFFICE</h1>
 	
 	
 	<h3>Conexiones que han entrado</h3>
-	<c:forEach items="<%=UsuariosLogueadosListener.usuarios %>" var="usuario">
-		<p>${usuario }</p>
 	
-	</c:forEach>
-	
+	<ol class="list-group">
+		<c:forEach items="<%=UsuariosLogueadosListener.usuarios %>" var="usuario">
+			<li class="list-item">${usuario }</li>
+		
+		</c:forEach>
+	</ol>
 	
 <jsp:include page="/includes/footer.jsp"></jsp:include>

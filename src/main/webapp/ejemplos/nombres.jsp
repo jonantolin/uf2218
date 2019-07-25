@@ -17,9 +17,10 @@
 			<%
 				ArrayList<String> listado =(ArrayList<String>) request.getAttribute("listaNombres");
 				
-				String encontrado = (String) request.getAttribute("encontrado");
+				Object encontrado = request.getAttribute("encontrado");
 				
-				if(encontrado.length() < 1){
+				
+				if(encontrado == null){
 					
 			%>
 			${noEncontrado }

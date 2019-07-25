@@ -13,19 +13,19 @@
 		<div class="form-group w-25">
 			<label for="num1">Número 1 </label> <input type="text"
 				class="form-control" id="num1"
-				placeholder="Introduce número" name="num1" value="${numero1 }" required pattern="[-+]?[0-9]*[.,]?[0-9]+">${num1 }
+				placeholder="Introduce número" name="num1" value="${numero1 }"  title="Un número, sin letras" required pattern="[-+]?[0-9]*[.,]?[0-9]+">${num1 }
 		</div>
 	
 		<div class="form-group w-25">
 			<label for="num2">Número 2</label> <input type="text"
 				class="form-control" id="num2" placeholder="Introduce número"
-				name="num2" value="${numero2 }" required pattern="[-+]?[0-9]*[.,]?[0-9]+">${num2 }
+				name="num2" value="${numero2 }" required title="Un número, sin letras" pattern="[-+]?[0-9]*[.,]?[0-9]+">${num2 }
 		</div>
 		
 		<div class="form-group">
 			<label for="operacion">Operación</label> 
 			<select id="operacion" name="operacion" >
-				<option disabled>Seleccione operación...</option>
+				<option disabled value="-1">Seleccione operación...</option>
 				<option value="sumar" ${(operacion == "sumar")?"selected":"" }>Sumar</option>
 				<option value="restar" ${(operacion == "restar")?"selected":"" }>Restar</option>
 				<option value="multiplicar" ${(operacion == "multiplicar")?"selected":"" }>Multiplicar</option>
@@ -39,10 +39,11 @@
 				</div>
 		</form>
 		<button class="btn btn-info" onclick="limpiar()">Limpiar</button>
-		<p>Resultado: <span id="resultado">${resultado }</span></p>
+		<div>Resultado <div class="border border-success p-3 w-25 rounded" id="resultado">${resultado }</div></div>
 		
 		<script>
-		function limpiar(){
+		function limpiar(event){
+			
 			document.getElementById("num1").value = "";
 			document.getElementById("num2").value = "";
 			document.getElementById("operacion").value = "";

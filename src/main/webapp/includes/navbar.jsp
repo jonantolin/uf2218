@@ -12,27 +12,24 @@
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item"><a class="nav-link" href="index.jsp">Inicio
-						
-				</a></li>
-				<li class="nav-item"><a class="nav-link" href="backoffice/videos">Videos
-						
-				</a></li>
-				<li class="nav-item"><a class="nav-link" href="ejemplos/calculadora.jsp">Calculadora
-						
-				</a></li>
+				<li class="nav-item"><a class="nav-link" href="index.jsp">Inicio</a></li>
+
+				<li class="nav-item"><a class="nav-link" href="ejemplos/calculadora.jsp">Calculadora</a></li>
+				
 				<c:if test="${usuario == null }">
-					<li class="nav-item"><a class="nav-link" href="login.jsp">Login
-	
-					</a></li>
+									
+					<li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
+				
 				</c:if>
+				
 				<c:if test="${usuario != null }">
-					<li class="nav-item"><a class="nav-link" href="logout">
-					Logout ${usuario }
-					</a></li>
-					<li class="nav-item"><a class="nav-link" href="backoffice/index.jsp">BackOffice
-			
-					</a></li>
+				
+					<li class="nav-item"><a class="nav-link" href="backoffice/videos">Videos</a></li>			
+				
+					<li class="nav-item"><a class="nav-link" href="logout">Logout ${usuario }</a></li>
+					
+					<li class="nav-item"><a class="nav-link" href="backoffice/index.jsp">BackOffice</a></li>
+					
 					<li class="nav-item">
 		     			<div class="dropdown">
 				 			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ipartek.formacion.controller.pojo.Alert;
+
 
 
 
@@ -25,20 +27,9 @@ public class CalculadoraServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CalculadoraServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+
 		doPost(request, response);
 	}
 
@@ -64,7 +55,7 @@ public class CalculadoraServlet extends HttpServlet {
 			numsValidos = true;
 			
 		}catch(Exception e) {
-			request.setAttribute("num1", "Debe ser un número" );
+			request.setAttribute("num1", new Alert("warning", "Debes introducir un número") );
 			
 		}
 		
@@ -74,7 +65,7 @@ public class CalculadoraServlet extends HttpServlet {
 			numsValidos = true;
 			
 		}catch(Exception e) {
-			request.setAttribute("num2", "Debe ser un número" );
+			request.setAttribute("num2", new Alert("warning", "Debes introducir un número") );
 			numsValidos = false;
 		}
 	
@@ -84,12 +75,8 @@ public class CalculadoraServlet extends HttpServlet {
 		double resultado=0;
 		
 		
-		/*if(sNum1 != null) {
-			if()
-		}*/
-		
 		if(operacion == null) {
-			request.setAttribute("mensaje", "Debes seleccionar una operación" );
+			request.setAttribute("mensaje", new Alert("warning", "Debes seleccionar una operación.") );
 		}else if(numsValidos) {
 			
 			

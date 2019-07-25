@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ipartek.formacion.controller.pojo.Alert;
+
 /**
  * Servlet implementation class ServletNombres
  */
@@ -38,21 +40,30 @@ public class ServletNombres extends HttpServlet {
 		
 		String encontrado ="";
 		boolean noEncontrado = true;
-		for(String nombre : listaNombres){
-			
-			if(nombre.equals(busqueda)) {
-				
-				encontrado = busqueda + " ha sido encontrado en la lista";
-				noEncontrado = false;
-			}
-		}
 		
-		request.setAttribute("busqueda", busqueda);
-		request.setAttribute("encontrado", encontrado );
 		
 		if(busqueda != null) {
-			request.setAttribute("noEncontrado", "<div role=\"alert\" class=\"alert alert-danger\">\""+busqueda+"\" no ha sido encontrado</div>" );
+			
+			for(String nombre : listaNombres){
+				
+				if(nombre.equals(busqueda)) {
+					
+					encontrado += busqueda + " ha sido encontrado en la lista"+"<br>";
+					noEncontrado = false;
+				}
+			}
+			
+			
+			
+			if(noEncontrado) {
+				request.setAttribute("noEncontrado", new Alert("danger", busqueda+" no ha sido encontrado en la lista.") );
+			}else {
+				
+				request.setAttribute("encontrado", new Alert("success", encontrado) );
+			}
+			request.setAttribute("busqueda", busqueda);
 		}
+		
 		request.setAttribute("listaNombres", listaNombres);
 		
 		request.getRequestDispatcher("ejemplos/nombres.jsp").forward(request, response);
@@ -68,12 +79,12 @@ public class ServletNombres extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String nombreNuevo = request.getParameter("nombre");
-		String mensaje;
+		
 		if(nombreNuevo != null) {
 			
 			if("".equals(nombreNuevo)) {
-				mensaje="<span class=\"text-danger\">Campo vacío</span>";
-				request.setAttribute("mensaje", mensaje);
+				
+				request.setAttribute("mensaje", new Alert("warning", "Campo vacío"));
 			}else {
 				listaNombres.add(nombreNuevo);
 			}

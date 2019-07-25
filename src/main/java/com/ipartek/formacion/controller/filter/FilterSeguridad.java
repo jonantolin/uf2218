@@ -38,14 +38,14 @@ public class FilterSeguridad implements Filter {
 	 * si lo pasa (el atributo "usuario" existe) -> va a la ruta a la que iba (que recojo previamente)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
+		
 
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpServletResponse res = (HttpServletResponse)response;
 		
 		HttpSession session = req.getSession();
 		
-		request.setAttribute("callback", req.getRequestURI()); // "coloco" este atributo en la request q mandaré si pasa el filtro
+		session.setAttribute("callback", req.getRequestURI()); // "coloco" este atributo en la request q mandaré si pasa el filtro
 		
 		if(session.getAttribute("usuario") != null) {
 			
@@ -58,7 +58,9 @@ public class FilterSeguridad implements Filter {
 		}else {
 			// response redireccionar a login
 			
-			res.sendRedirect(req.getContextPath() + "/login.jsp");
+			// res.sendRedirect(req.getContextPath() + "/login.jsp"); // No, porque perderia la pagina solicitada (callback)
+			
+			request.getRequestDispatcher("/login.jsp").forward(request, response);
 		}
 		
 		

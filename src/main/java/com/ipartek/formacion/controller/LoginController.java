@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.ipartek.formacion.controller.pojo.Alert;
+
 /**
  * Servlet implementation class LoginController
  */
@@ -39,15 +41,18 @@ public class LoginController extends HttpServlet {
 		String usuario = request.getParameter("usuario");
 		String password = request.getParameter("pass");
 		
-		String ultimaURL = (String) request.getAttribute("callback");
+		HttpSession session = request.getSession();
+		
+		String ultimaURL = (String) session.getAttribute("callback");
 		
 		if("admin".equals(usuario) && "admin".equals(password)) {
 			
-			HttpSession session = request.getSession();
+			//HttpSession session = request.getSession(); // Recojo la sesion del cliente logueado
+			
 			// session.setMaxInactiveInterval(60 * 5); // 5 min, tiempo de sesion o expirara (mejor en web.xml)
 			
 			session.setAttribute("usuario", usuario);
-			session.setAttribute("nuevoUsuario", request.getRemoteAddr()); //recojo Ip de la sesion actual
+			session.setAttribute("nuevoUsuario", "Usuario conectado (IP remota) --> " + request.getRemoteAddr()); //recojo Ip de la sesion actual
 			
 			request.setAttribute("mensaje", "<p>ONGI ETORRI, "+usuario+"</p>");
 			
@@ -57,15 +62,17 @@ public class LoginController extends HttpServlet {
 				//request.getRequestDispatcher("backoffice/index.jsp").forward(request, response);
 				response.sendRedirect("backoffice/index.jsp");
 			}else {
-				session.removeAttribute("callback");
+				
 				response.sendRedirect(ultimaURL);
+				//request.getRequestDispatcher(ultimaURL).forward(request, response);
+				session.removeAttribute("callback");
 			}
 			
 			
 			
 		}else {
 			
-			request.setAttribute("mensaje", "<p>Credenciales no correctas</p>");
+			request.setAttribute("mensaje", new Alert("danger", "Acceso denegado, credenciales incorrectas."));
 		
 		request.getRequestDispatcher("login.jsp").forward(request, response);
 		

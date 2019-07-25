@@ -26,6 +26,20 @@ public class Alert {
 	public void setTexto(String texto) {
 		this.texto = texto;
 	}
+	
+	
+	/**
+	 * @return String div con la alerta con tipo y texto
+	 */
+	public String toString() { 
+		
+		String alertaCompleta;
+		
+		alertaCompleta = "<div class=\"alert alert-"+getTipo()+"\" role=\"alert\">"+getTexto()+"</div>";
+		
+		return alertaCompleta;
+			
+	}
 
 
 }

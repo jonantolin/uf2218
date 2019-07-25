@@ -15,6 +15,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import com.ipartek.formacion.controller.pojo.Alert;
 import com.ipartek.formacion.model.dao.VideoDAO;
 import com.ipartek.formacion.model.pojo.Video;
 
@@ -120,10 +121,10 @@ public class VideoController extends HttpServlet {
 					if(eliminar(request, response)) {
 						
 						request.setAttribute("op", OP_INSERTAR);
-						request.setAttribute("mensaje", "<div class=\"alert alert-success\" role=\"alert\"> Video eliminado con éxito</div>");
+						request.setAttribute("mensaje", new Alert("success", "Video eliminado con éxito."));
 						
 					}else {
-						request.setAttribute("mensaje", "<div class=\"alert alert-danger\" role=\"alert\">No ha sido posible eliminarlo</div>");
+						request.setAttribute("mensaje", new Alert("danger", "No ha sido posible eliminar el vídeo."));
 					}
 					
 					view = VIEW_FORMU;
@@ -170,7 +171,7 @@ public class VideoController extends HttpServlet {
 			}
 			
 			request.setAttribute("op", OP_MODIFICAR); // para recoger en en el value del input hidden una vez creado
-			request.setAttribute("mensaje", " <div class=\"alert alert-success\" role=\"alert\">Nuevo video registrado con éxito</div>");
+			request.setAttribute("mensaje", new Alert("success", "Nuevo vídeo registrado cn éxito."));
 			
 			
 		}else {
@@ -214,7 +215,7 @@ public class VideoController extends HttpServlet {
 			if(videoDAO.modificar(videoNuevo)) {
 				modificado = true;
 			}
-			request.setAttribute("mensaje", "<div class=\"alert alert-success\" role=\"alert\"> Video modificado con éxito</div>");
+			request.setAttribute("mensaje", new Alert("success", "Video modificado con éxito."));
 		}else {
 			
 			String mensaje = "<div class=\"alert alert-danger\" role=\"alert\">";
@@ -248,5 +249,5 @@ public class VideoController extends HttpServlet {
 		
 		doProccess(request, response);
 	}
-//TODO implementar mensaje de alerta con el pojo Alert
+
 }

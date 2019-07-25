@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-import org.omg.CORBA.Request;
+
 
 /**
  * Application Lifecycle Listener implementation class UsuariosLogueadosListener
@@ -18,13 +18,11 @@ import org.omg.CORBA.Request;
 @WebListener
 public class UsuariosLogueadosListener implements HttpSessionListener, HttpSessionAttributeListener {
 
-	public static String nombre; //TODO lo mismo para una coleccion
-	//public static String pruebaIp = "";
+	public static String nombre; 
 	public static ArrayList<String> usuarios = new ArrayList<String>();
-	HttpSession session;
-	public static String mens="";
-	public static String usuarioAnterior;
-	public static String ultimaSesion;
+	public HttpSession session;
+	
+	
     /**
      * Default constructor. 
      */
@@ -36,11 +34,13 @@ public class UsuariosLogueadosListener implements HttpSessionListener, HttpSessi
      * @see HttpSessionListener#sessionCreated(HttpSessionEvent)
      */
     public void sessionCreated(HttpSessionEvent se)  { 
-         // sesion creada
+
+    	// sesion creada
     	
     	session = se.getSession(); //Recupero la sesion la primera vez que entra
-    	String estaSesion = session.getId();
-    	//session.setAttribute("mensaje", mens);
+    	
+    	//String estaSesion = session.getId();
+
 
     }
 
@@ -48,61 +48,42 @@ public class UsuariosLogueadosListener implements HttpSessionListener, HttpSessi
      * @see HttpSessionListener#sessionDestroyed(HttpSessionEvent)
      */
     public void sessionDestroyed(HttpSessionEvent se)  { 
-    	//session.setAttribute("mensaje", "<p>La sesión ha caducado. Vuelve a entrar.</p>");
-    	//HttpSession sesionEliminada = se.getSession();
-    	if(se.getSession().getAttribute("logoutManual") != null) {
-    		mens="Gracias por su visita, vuelve pronto";
-    		
-    	}else {
-    		mens="La sesión ha expirado, vuelve a ingresar";
-    	}
     	
     	
-    	//se.getSession().setAttribute("mensaje", "Llevame cojones");
-    	//sesionEliminada.setAttribute("mensaje", "Llevame cojones");
-    	
+    	 	
     }
 
-	/**
-     * @see HttpSessionAttributeListener#attributeAdded(HttpSessionBindingEvent)
+
+    /**
+     * HttpSessionBindingEvent event contiene la sesion, el nombre y el valor del atributo agregado
+     * event.getSession() / event.getName() / event.getValue()
      */
     public void attributeAdded(HttpSessionBindingEvent event)  { 
-    	
-    	Object recuperado = session.getAttribute("nuevoUsuario");
-    	
-    	// Mejor if "nuevoUsuario".equals(event.getName()){
-    	// usuarios.add(event.getValue())
-    	//}
-    	//ordenar hashmap
-    	
-    	if(recuperado != null) {
     		
-    		nombre = (String)session.getAttribute("nuevoUsuario");
- 	
-            usuarios.add(nombre);	
-
+    	if("nuevoUsuario".equals(event.getName())) {
+    		usuarios.add((String)event.getValue());
     	}
- 
     }
 
-	/**
-     * @see HttpSessionAttributeListener#attributeRemoved(HttpSessionBindingEvent)
+
+    /**
+     * HttpSessionBindingEvent event contiene la sesion, el nombre y el valor del atributo borrado
+     * event.getSession() / event.getName() / event.getValue()
      */
     public void attributeRemoved(HttpSessionBindingEvent event)  { 
-    
-    	String deslogueado = (String)event.getValue();
     	
     	if("nuevoUsuario".equals(event.getName())) {
     		
-    		usuarios.remove(deslogueado);
+    		usuarios.remove((String)event.getValue());
     	}
     }
 
-	/**
-     * @see HttpSessionAttributeListener#attributeReplaced(HttpSessionBindingEvent)
+    /**
+     * HttpSessionBindingEvent event contiene la sesion, el nombre y el valor del atributo cambiado
+     * event.getSession() / event.getName() / event.getValue()
      */
     public void attributeReplaced(HttpSessionBindingEvent event)  { 
-    	 System.out.println("vacio");
+    	// System.out.println("vacio");
     }
 	
 }

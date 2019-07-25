@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ipartek.formacion.controller.listener.UsuariosLogueadosListener;
 
 /**
  * Servlet implementation class LogOutController
@@ -36,23 +35,19 @@ public class LogOutController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		session.setAttribute("logoutManual", true);
-		session.removeAttribute("usuario");
-		session.invalidate();
-		//session = null;
 		
-		//request.setAttribute("mensaje", "<p>Gracias por visitarnos</p>");
-		String mensaje = UsuariosLogueadosListener.mens;
-		request.setAttribute("mensaje", mensaje);
+		HttpSession session = request.getSession();
+ 
+		//session.removeAttribute("usuarioNuevo"); // Se eliminara al invalidar la sesion abajo
+		
+		session.invalidate(); // Se borraran todos los atributos de sesion
+		session = null;
+
+		request.setAttribute("mensaje", "<p>Gracias por visitarnos</p>");
 		request.getRequestDispatcher("login.jsp").forward(request, response);
+		
+		
 	}
 
-	/*
-	 * El usuario cada vez que va al Detalle del video un dropdownbutton con todos los videos que ha visto
-	 * */
-	
-	// Si te redirige fuera, un mensaje que diga "ha caducado la sesion" o similar
-	
 	//Explicar Session, Filtros, Listeners, y Redirecciones
 }
