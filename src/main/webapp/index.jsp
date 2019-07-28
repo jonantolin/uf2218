@@ -21,10 +21,10 @@
 		<li class="list-group-item"><a href="jstl">JSTL - Java Server Tag Libraries</a></li>
 		<li class="list-group-item"><a href="ejemplos/expresiones.jsp">EL (Expression Language)</a></li>
 		<li class="list-group-item"><a href="ejemplos/errores.jsp">Páginas de error personalizadas</a></li>
-		<li class="list-group-item">Session</li>
-		<li class="list-group-item">Cookies</li>
-		<li class="list-group-item">Filtros</li>
-		<li class="list-group-item">Listener o escuchadores de eventos</li>
+		<li class="list-group-item"><a href="ejemplos/sesion.jsp">Session</a></li>
+		<li class="list-group-item"><a href="ejemplos/ambito.jsp">Scope o Ambito de la app</a></li>
+		<li class="list-group-item"><a href="ejemplos/filtros.jsp">Listeners(Disparadores) y Filtros</a></li>
+		<li class="list-group-item"><a href="ejemplos/cookie.jsp">Cookies</a></li>
 	</ul>
 
 
