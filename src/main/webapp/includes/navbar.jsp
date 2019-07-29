@@ -17,12 +17,7 @@
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li><a href="i18n?idiomaSeleccionado=es_ES&ruta=${pageContext.request.requestURL} "><img width="24px"
-			src="resources/img/espana.png"></a></li>
-			<li><a href="i18n?idiomaSeleccionado=en_EN&ruta=${pageContext.request.requestURL}"><img width="24px"
-			src="resources/img/uk.png"></a></li>
-			<li><a href="i18n?idiomaSeleccionado=eu_ES&ruta=${pageContext.request.requestURL}"><img width="24px"
-			src="resources/img/ikurrina.png"></a></li>
+				
 				<li class="nav-item"><a class="nav-link" href="index.jsp"><fmt:message key="menu.inicio" /></a></li>
 
 				<li class="nav-item"><a class="nav-link" href="ejemplos/calculadora.jsp">Calculadora</a></li>
@@ -55,9 +50,15 @@
 	     			</li>
 	
 				</c:if>
+				
 			</ul>
 		</div>
 	</nav> <!-- end navbar -->
-
+	
+	<nav class="bg-secondary p-2">
+    	<a href="i18n?idiomaSeleccionado=en_EN&ruta=${pageContext.request.requestURI}"><img src="resources/img/uk.png" alt="" class="${sessionScope.locale != 'en_EN' ? 'inactive': ''  }"></a>
+    	<a href="i18n?idiomaSeleccionado=eu_ES&ruta=${pageContext.request.requestURI}"><img src="resources/img/ikurrina.png" alt="" class="${sessionScope.locale != 'eu_ES' ? 'inactive': ''  }"></a>
+    	<a href="i18n?idiomaSeleccionado=es_ES&ruta=${pageContext.request.requestURI}"><img src="resources/img/espana.png" alt="" class="${sessionScope.locale != 'es_ES' ? 'inactive': ''  }"></a> 
+    </nav>
 
 	<main class="container">

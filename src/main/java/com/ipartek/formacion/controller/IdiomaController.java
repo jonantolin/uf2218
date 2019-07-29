@@ -25,6 +25,7 @@ public class IdiomaController extends HttpServlet {
 		
 		String idioma="es";
 		String pais = "ES";
+		
 		if(idiomaSeleccionado != null) {
 			idioma = idiomaSeleccionado.split("_")[0];
 			pais = idiomaSeleccionado.split("_")[1];
@@ -41,12 +42,14 @@ public class IdiomaController extends HttpServlet {
 		
 		request.setAttribute("mensajeIdioma", properties.getString("menu.inicio"));
 		
-		request.getRequestDispatcher("i18n.jsp").forward(request, response);
-		/*if(ruta != null) {
-			request.getRequestDispatcher(ruta).forward(request, response);
+		//request.getRequestDispatcher("i18n.jsp").forward(request, response);
+		if(ruta != null) {
+			String rutaFormateada = ruta.toString();
+			rutaFormateada = rutaFormateada.split("uf2218")[1];
+			request.getRequestDispatcher(rutaFormateada).forward(request, response);
 		}else {
-			request.getRequestDispatcher("i18n.jsp").forward(request, response);
-		}*/
+			request.getRequestDispatcher("ejemplos/i18n.jsp").forward(request, response);
+		}
 		
 		
 		
