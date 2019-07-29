@@ -1,6 +1,11 @@
-	
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 	<%@page import="com.ipartek.formacion.controller.VideoController"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<c:set var="locale" value="${not empty sessionScope.locale ? sessionScope.locale : 'eu_ES'}" scope="session" />
+<fmt:setLocale value="${locale}" />
+<fmt:setBundle basename="i18n.i18nmessages" /> 
+
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<a class="navbar-brand" href="#">JEE</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -12,21 +17,27 @@
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item"><a class="nav-link" href="index.jsp">Inicio</a></li>
+				<li><a href="i18n?idiomaSeleccionado=es_ES&ruta=${pageContext.request.requestURL} "><img width="24px"
+			src="resources/img/espana.png"></a></li>
+			<li><a href="i18n?idiomaSeleccionado=en_EN&ruta=${pageContext.request.requestURL}"><img width="24px"
+			src="resources/img/uk.png"></a></li>
+			<li><a href="i18n?idiomaSeleccionado=eu_ES&ruta=${pageContext.request.requestURL}"><img width="24px"
+			src="resources/img/ikurrina.png"></a></li>
+				<li class="nav-item"><a class="nav-link" href="index.jsp"><fmt:message key="menu.inicio" /></a></li>
 
 				<li class="nav-item"><a class="nav-link" href="ejemplos/calculadora.jsp">Calculadora</a></li>
 				
 				<c:if test="${usuario == null }">
 									
-					<li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
+					<li class="nav-item"><a class="nav-link" href="login.jsp"><fmt:message key="menu.login" /></a></li>
 				
 				</c:if>
 				
 				<c:if test="${usuario != null }">
 				
-					<li class="nav-item"><a class="nav-link" href="backoffice/videos">Videos</a></li>			
+					<li class="nav-item"><a class="nav-link" href="backoffice/videos"><fmt:message key="menu.videos" /></a></li>			
 				
-					<li class="nav-item"><a class="nav-link" href="logout">Logout ${usuario }</a></li>
+					<li class="nav-item"><a class="nav-link" href="logout"><fmt:message key="menu.logout" /> ${usuario }</a></li>
 					
 					<li class="nav-item"><a class="nav-link" href="backoffice/index.jsp">BackOffice</a></li>
 					
@@ -47,5 +58,6 @@
 			</ul>
 		</div>
 	</nav> <!-- end navbar -->
+
 
 	<main class="container">

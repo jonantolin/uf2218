@@ -3,6 +3,8 @@
 
 	<h1>Session en JSP (HttpSession session)</h1>
 	
+	<section class="p-3 bg-light">
+	
 	<p>Hasta ahora hemos estado trabajando con request individuales, pero podemos gestionar los datos que se pasan entre la sesion del cliente individual y servidor. La sesión se refiere al navegador que envía la petición que permanecerá abierta mientras no expire el tiempo de sesión definido por la aplicación o bien ésta la cierre en algún momento.
 	<p>Como es obvio, los atributos de sesión del objeto HttpSession almacena datos independientes para cada sesión.</p>
 	<h3>Funcionamiento</h3>
@@ -37,4 +39,5 @@ session.setMaxInactiveInterval(60);  // 60 segundos
 
 *En caso de no especificar el propio servidor tiene un tiempo de expiración.</p>
 
+	</section>
 <jsp:include page="/includes/footer.jsp"></jsp:include>

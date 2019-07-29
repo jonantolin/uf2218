@@ -55,7 +55,7 @@ public class CalculadoraServlet extends HttpServlet {
 			numsValidos = true;
 			
 		}catch(Exception e) {
-			request.setAttribute("num1", new Alert("warning", "Debes introducir un número") );
+			request.setAttribute("num1", new Alert("danger", "Debes introducir un número") );
 			
 		}
 		
@@ -65,9 +65,11 @@ public class CalculadoraServlet extends HttpServlet {
 			numsValidos = true;
 			
 		}catch(Exception e) {
-			request.setAttribute("num2", new Alert("warning", "Debes introducir un número") );
+			request.setAttribute("num2", new Alert("danger", "Debes introducir un número") );
 			numsValidos = false;
-		}
+		}finally {
+			
+		
 	
 		String operacion = request.getParameter("operacion");
 		
@@ -76,7 +78,7 @@ public class CalculadoraServlet extends HttpServlet {
 		
 		
 		if(operacion == null) {
-			request.setAttribute("mensaje", new Alert("warning", "Debes seleccionar una operación.") );
+			request.setAttribute("mensaje", new Alert("danger", "Debes seleccionar una operación.") );
 		}else if(numsValidos) {
 			
 			
@@ -98,10 +100,16 @@ public class CalculadoraServlet extends HttpServlet {
 				break;
 			
 			case OP_DIVIDIR:
-				
+				if(num2 == 0) {
+					request.setAttribute("resul", new Alert("warning", "Dividido por cero, no se puede o infinito") );
+				}
 				resultado = num1 / num2;
 				break;
+				
+			default:
+				request.setAttribute("mensaje", new Alert("danger", "Debes seleccionar una operación.") );
 			}
+			
 			
 			request.setAttribute("resultado", resultado );
 		}
@@ -109,7 +117,7 @@ public class CalculadoraServlet extends HttpServlet {
 		
 		request.getRequestDispatcher("ejemplos/calculadora.jsp").forward(request, response);
 		
-		
+		}
 		
 	}
 

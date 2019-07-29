@@ -1,6 +1,6 @@
 <jsp:include page="/includes/header.jsp"></jsp:include>
 <jsp:include page="/includes/navbar.jsp"></jsp:include>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix = "fmt" %>
 
 	<!-- pattern="[-+]?[0-9]*[.,]?[0-9]+" -->
 	
@@ -25,7 +25,7 @@
 		<div class="form-group">
 			<label for="operacion">Operación</label> 
 			<select id="operacion" name="operacion" >
-				<option disabled value="-1">Seleccione operación...</option>
+				<option value="-1" selected>Seleccione operación...</option>
 				<option value="sumar" ${(operacion == "sumar")?"selected":"" }>Sumar</option>
 				<option value="restar" ${(operacion == "restar")?"selected":"" }>Restar</option>
 				<option value="multiplicar" ${(operacion == "multiplicar")?"selected":"" }>Multiplicar</option>
@@ -39,7 +39,14 @@
 				</div>
 		</form>
 		<button class="btn btn-info" onclick="limpiar()">Limpiar</button>
-		<div>Resultado <div class="border border-success p-3 w-25 rounded" id="resultado">${resultado }</div></div>
+		<div>Resultado <div class="border border-success p-3 w-25 rounded" id="resultado">${resul }
+		 
+		<c:set var = "resultado" value = "${resultado }" />
+		<!-- <fmt:setLocale value = "es_ES"/>  YA ESTA EN CASTELLANO EL LOCALE DE TOMCAT, en caso contrario, descomentar -->
+         <fmt:formatNumber value = "${resultado}" type = "number" maxFractionDigits = "2"/>
+		
+		
+		</div></div>
 		
 		<script>
 		function limpiar(event){

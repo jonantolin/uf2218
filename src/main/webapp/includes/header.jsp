@@ -1,6 +1,9 @@
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
 
 <!doctype html>
+	
+	
 <html lang="es">
 <head>
 <!-- Required meta tags -->
@@ -14,5 +17,8 @@
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css">
 
 <title>JEE</title>
+
+
+
 </head>
 <body>

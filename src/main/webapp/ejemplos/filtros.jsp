@@ -5,6 +5,7 @@
 <div role="main">
 		<span id="maincontent"></span>
 		<h2>Listenner y Filters</h2>
+		<section class="p-3 bg-light">
 		<div class="box generalbox center clearfix p-y-1">
 			<div class="no-overflow">
 				<p></p>
@@ -120,7 +121,7 @@
 				<p></p>
 			</div>
 		</div>
-
+		</section>
 	</div>
 
 <jsp:include page="/includes/footer.jsp"></jsp:include>

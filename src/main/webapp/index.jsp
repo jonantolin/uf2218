@@ -25,6 +25,7 @@
 		<li class="list-group-item"><a href="ejemplos/ambito.jsp">Scope o Ambito de la app</a></li>
 		<li class="list-group-item"><a href="ejemplos/filtros.jsp">Listeners(Disparadores) y Filtros</a></li>
 		<li class="list-group-item"><a href="ejemplos/cookie.jsp">Cookies</a></li>
+		<li class="list-group-item"><a href="i18n">i18n - Multiidioma </a></li>
 	</ul>
 
 
